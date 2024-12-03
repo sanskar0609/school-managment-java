@@ -1,0 +1,49 @@
+-- Create the database
+CREATE DATABASE IF NOT EXISTS school_management;
+
+-- Use the created database
+USE school_management;
+
+-- Create the students table
+CREATE TABLE IF NOT EXISTS students (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    age INT NOT NULL,
+    grade VARCHAR(10) NOT NULL
+);
+
+-- Create the teachers table
+CREATE TABLE IF NOT EXISTS teachers (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    subject VARCHAR(50) NOT NULL,
+    experience INT NOT NULL
+);
+
+-- Create the classes table
+CREATE TABLE IF NOT EXISTS classes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    class_name VARCHAR(50) NOT NULL,
+    student_id INT,
+    FOREIGN KEY (student_id) REFERENCES students(id)
+        ON DELETE SET NULL
+        ON UPDATE CASCADE
+);
+
+-- Insert sample data into students
+INSERT INTO students (name, age, grade) VALUES
+('John Doe', 14, '8th'),
+('Jane Smith', 15, '9th'),
+('Emily Davis', 13, '7th');
+
+-- Insert sample data into teachers
+INSERT INTO teachers (name, subject, experience) VALUES
+('Mr. Anderson', 'Math', 10),
+('Ms. Carter', 'Science', 8),
+('Dr. Brown', 'History', 12);
+
+-- Insert sample data into classes
+INSERT INTO classes (class_name, student_id) VALUES
+('Class 8A', 1),
+('Class 9B', 2),
+('Class 7C', 3);
